@@ -23,7 +23,14 @@
     "avfilter",
     "avformat",
     "swresample",
-    "swscale"
+    "swscale",
+    "ffmpeg",
+    "ffplay",
+    "ffprobe",
+    "version3",
+    "all",
+    "all-gpl",
+    "all-nonfree"
   ],
   "features": {
     "all": {
