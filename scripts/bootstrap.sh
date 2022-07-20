@@ -126,23 +126,23 @@ fi
 
 # Choose the vcpkg binary to download
 vcpkgDownloadTool="ON"
-vcpkgToolReleaseTag="2022-03-30"
+vcpkgToolReleaseTag="2022-07-14"
 if [ "$UNAME" = "Darwin" ]; then
     echo "Downloading vcpkg-macos..."
-    vcpkgToolReleaseSha="8bf65bc52b48c0c048c465036dfab60c0d6b84d2c61bf36c948b58d2da0a6f9f21b00dbc888fe5b163c275e901a0014482e50895ee607408cf533057b66a4e73"
+    vcpkgToolReleaseSha="f89d0abbc2b385ccf7a8548fb7e612007f092891fa7feaa6a7090fdee8877d8f3f08c580c6866c42bcaed9bf7263eab214c511709fc7972d321c136fcb5a6920"
     vcpkgToolName="vcpkg-macos"
 elif [ "$vcpkgUseMuslC" = "ON" ]; then
     echo "Downloading vcpkg-muslc..."
-    vcpkgToolReleaseSha="d5a0a67ef966b1db5ded37986ccabd8a6dc2531209e07945c32679faab45c0f001b95eef342e41f8937234e8efa6b038847b78f77c19d949a7d2aa7857b6a019"
+    vcpkgToolReleaseSha="f54d1739e52177a528221eed7e1bca365c8e4bad0c9dbfe925089bf9b57f50563d39ac44aafaae33ec553b8388b98ec6af0ed3bdde8ee23e2233578a2ce3df8b"
     vcpkgToolName="vcpkg-muslc"
 elif [ "$ARCH" = "x86_64" ]; then
     echo "Downloading vcpkg-glibc..."
-    vcpkgToolReleaseSha="14dae353ce576e688cd93f0607f4eb7d724fb34f4c78c62d90db0c0fc4806e21c0da2b4fbe0b2a776ac3e8c669685e8d26990b5828be252645ac9289c7d015f9"
+    vcpkgToolReleaseSha="df734af8160ed3d67d40f6f9bb721a6fc5a735fda99efaba2588400a5fd681a1e3d15d13b316d7ccba5506d90d1086e60608b2e67e137a702bea3679cb3d1663"
     vcpkgToolName="vcpkg-glibc"
 else
     echo "Unable to determine a binary release of vcpkg; attempting to build from source."
     vcpkgDownloadTool="OFF"
-    vcpkgToolReleaseSha="d1fba2655e04dbf599129e688b40be6b61cc23c41943b5d0d4ac23a7cb5df195fadfe252a8c9ea619d4730352eb40e424ef50919ecfad6e52a76b2b4627dbb16"
+    vcpkgToolReleaseSha="eebdedb2743476342ea578c360cdc35c869680139c7e0a841a453dd856b2f8b50f951b6c807d4b783e3c46c94f36d66fb498316d3039d6c9b79613553c564612"
 fi
 
 # Do the download or build.
@@ -195,7 +195,9 @@ if [ "$vcpkgDownloadTool" = "ON" ]; then
     vcpkgDownloadFile "https://github.com/microsoft/vcpkg-tool/releases/download/$vcpkgToolReleaseTag/$vcpkgToolName" "$vcpkgRootDir/vcpkg" $vcpkgToolReleaseSha
 else
     if [ "x$CXX" = "x" ]; then
-        if which g++-11 >/dev/null 2>&1; then
+        if which g++-12 >/dev/null 2>&1; then
+            CXX=g++-12
+        elif which g++-11 >/dev/null 2>&1; then
             CXX=g++-11
         elif which g++-10 >/dev/null 2>&1; then
             CXX=g++-10
