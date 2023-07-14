@@ -4,10 +4,8 @@ vcpkg_from_gitlab(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO GNOME/pango
     REF "${VERSION}"
-    SHA512 30be64784fac2539741c5e085ed0cf515fdd2044e71b6c08121dfb838e50d1a31f4f9e53d9869b65aa1fa246ab5cc1bec18503a08dcf0337aece84290472e336
+    SHA512 5de67e711a1f25bd2c741162bb8306ae380d134f95b9103db6e96864d3a1100321ce106d8238dca54e746cd8f1cfdbe50cc407878611d3d09694404f3f128c73
     HEAD_REF master
-    PATCHES
-        freetype2-pc.patch
 ) 
 
 if("introspection" IN_LIST FEATURES)
@@ -54,4 +52,4 @@ vcpkg_copy_pdbs()
 
 vcpkg_copy_tools(TOOL_NAMES pango-view pango-list pango-segmentation AUTO_CLEAN)
 
-file(INSTALL "${SOURCE_PATH}/COPYING" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/COPYING")
