@@ -4,8 +4,8 @@ vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO zeux/volk
-    REF 97e029bea37ae8ef443a1de684207127717de606
-    SHA512 a50b2c90499688b66bfa88a7cde438aa78dd27a43a6fe375f348b2587e321540306d0c383272091b7f78a64a8415cfe9e908d0dfc949562dfee8e0e3b4380acc
+    REF "vulkan-sdk-${VERSION}"
+    SHA512 1af3933ab18120ab9418282069ee5a1ba86e8333b6fb1cfc04c85132f9c54ba1d21bbd833fa9e35cfd08edf2867982f19c536c0744569c6a91b0be8b54986e09
     HEAD_REF master
 )
 
@@ -21,4 +21,5 @@ vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/volk)
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 
-file(INSTALL "${SOURCE_PATH}/LICENSE.md" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE.md")
+file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
